@@ -19,14 +19,27 @@
 </head>
 <body>
 <header class="bar"><a class="brand" href=""><img src="assets/mark-128.png" alt="" width="32" height="32">Bubbleshift</a>
-<nav><a href="guides/">Guides</a><a href="support/">Support</a><a href="privacy/">Privacy</a></nav></header>
+<nav><a href="try/">Try it</a><a href="guides/">Guides</a><a href="support/">Support</a></nav></header>
 <main>
 <section class="hero">
 <img class="mark" src="assets/mark-256.png" alt="Bubbleshift" width="160" height="160">
 <h1>Drag. Shift. Convert.</h1>
 <p class="lead">A local file converter for Mac. Start dragging a file, tap ⇧&nbsp;Shift, and drop it on the format you need. Tap ⌘&nbsp;Command instead for one-tap actions.</p>
 <span class="store soon">Coming soon to the Mac App Store</span>
+<a class="try-link" href="#try">or try it right here ↓</a>
 <video class="demo" src="assets/demo.mp4" poster="assets/shift.jpg" autoplay muted loop playsinline aria-label="Dragging a photo, tapping Shift and dropping it on JPG"></video>
+</section>
+<section class="try" id="try" data-try data-assets="assets/">
+<h2>Try it right here</h2>
+<p>Drag a file in the window, then tap <b>⇧&nbsp;Shift</b> for formats, <b>⌘&nbsp;Command</b> for actions or <b>⌥&nbsp;Option</b> for file commands. On a phone or tablet, tap a key below, then drag.</p>
+<div class="stage" role="application" aria-label="Demo: drag a file, then tap Shift, Command or Option to choose what to do with it">
+<div class="win"><div class="win-bar"><i></i><i></i><i></i><b>Demo</b><button type="button" data-reset>Reset</button></div><div class="files"></div></div>
+<div class="ring"></div><div class="coach"></div><div class="toast" role="status"></div>
+</div>
+<div class="keys"><button class="key" type="button" data-ring="formats"><kbd>⇧</kbd><span>Shift<small>Formats</small></span></button><button class="key" type="button" data-ring="actions"><kbd>⌘</kbd><span>Command<small>Actions</small></span></button><button class="key" type="button" data-ring="files"><kbd>⌥</kbd><span>Option<small>File commands</small></span></button></div>
+<p class="note">A simulation: nothing here is converted or uploaded. Bubbleshift does the real thing with your files, in Finder.</p>
+
+<script src="assets/try.js" defer></script>
 </section>
 <section class="feature"><img src="assets/shift.jpg" alt="A photo being dragged with the JPG option stuck to it" loading="lazy" width="1600" height="850">
 <div><h2>Convert mid-drag</h2><p>No window to open. Tap Shift while you drag and a ring of formats appears under your pointer; the new file lands right beside the original, which stays untouched.</p></div></section>
