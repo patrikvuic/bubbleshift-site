@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Help &amp; support – Bubbleshift</title>
+<meta name="description" content="How to use Bubbleshift and how to reach support.">
+<link rel="icon" href="../assets/icon-64.png">
+<link rel="apple-touch-icon" href="../assets/icon-180.png">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+<header class="bar"><a class="brand" href="../"><img src="../assets/mark-128.png" alt="" width="32" height="32">Bubbleshift</a>
+<nav><a href="../support/">Support</a><a href="../privacy/">Privacy</a></nav></header>
+<main class="doc"><div class="contact"><h2>Contact support</h2><p>Email <a href="mailto:vuicpatrik@gmail.com">vuicpatrik@gmail.com</a>. Please include your macOS version, the Bubbleshift version, the input and output formats, and any error message. Don't attach private files unless we ask and you choose to share them.</p></div>
+<h1>Using Bubbleshift</h1>
+<h2>Convert a file</h2>
+<p>Click the center of the drop area to choose files, or drag files onto it. Choose an output format for each queued file, select the destination, and press Convert. Completed files can be revealed in Finder with the folder button. Originals are kept; existing output names get a numeric suffix.</p>
+<h2>Shift-drag and Command-drag</h2>
+<p>Keep Bubbleshift running. Start dragging files in Finder, then tap Shift to see formats, Command to see actions or Option for file commands, and drop on a bubble. Press the key after the drag has started; Command held while clicking changes the Finder selection instead. You can switch between Shift and Command while still dragging. Your files are never moved by the drag. Only options shared by all dragged files appear. Enable or disable this in Settings. In the App Store edition, choose an output folder when prompted the first time; later conversions can reuse that permission.</p>
+<h2>File commands</h2>
+<p>Tap Option while dragging for file commands. They act on the dragged files right away: AirDrop sends them, Path copies their full paths, Copy puts the files on the clipboard to paste in any Finder window, Copy to and Move ask for a folder (Move is only in the direct-download edition), and Terminal opens Terminal in that folder.</p>
+<h2>Actions</h2>
+<p>Actions create a new file and never change the original.</p>
+<p>Compress: JPEG and HEIC images are saved at a lower quality; PNG, TIFF and BMP images without transparency become JPEG. PDFs keep their text and re-encode embedded images at screen resolution. Videos are re-encoded as HEVC at up to 1080p. If the result would not be meaningfully smaller, nothing is saved.</p>
+<p>Merge (two or more files): combines PDFs and images into one PDF, in the order they were dragged.</p>
+<p>Split: saves every page of a PDF as its own PDF, in a new folder.</p>
+<p>Resize: scales images, keeping their format and metadata. While dragging, rest on Resize for a moment to choose a size: 50%, or a longest side of 1080, 2048 or 3840 pixels. Return to the center to go back to the actions. Dropping straight on Resize uses the size you chose last (2048 pixels at first). In the queue, pick a size bubble, or the … bubble to enter an exact width and height; the lock keeps the original proportions.</p>
+<p>Clean: removes location, camera details and other metadata from images (keeping orientation) and removes location and personal metadata from videos.</p>
+<p>Text: extracts text into a TXT file. Text already in a PDF is used directly; images and scanned pages are read with on-device text recognition.</p>
+<p>Mute: removes the sound from a video without re-encoding the picture where possible.</p>
+<p>Cutout (macOS 14 or later): removes the background behind the main subject of an image and saves a transparent PNG.</p>
+<h2>Supported conversions</h2>
+<p>Images: PNG, JPEG, HEIC, AVIF, TIFF, BMP, GIF, WebP, JPEG XL, PSD, ICO and camera RAW files (Canon, Nikon, Sony, Fujifilm, Olympus, Panasonic, Pentax, Samsung and DNG) convert to PNG, JPEG, HEIC, AVIF, TIFF, GIF, BMP, PDF or ICO. Photos keep the orientation they are shown in. Icons are at most 256 × 256 pixels and squared with a transparent margin. Animated inputs use the first frame. WebP cannot be written.</p>
+<p>Audio: MP3, M4A, AAC, WAV, AIFF, FLAC and CAF convert to M4A (AAC), WAV, AIFF, FLAC or ALAC (lossless, in .m4a). macOS includes no MP3 encoder, so MP3 is input only.</p>
+<p>Documents: DOCX, RTF, TXT, ODT, HTML and Markdown convert locally to PDF, DOCX, ODT, RTF, TXT or HTML. Markdown headings, lists, emphasis, code and links keep their look. PDF text can export to TXT or DOCX, and PDF pages can export to PNG or JPEG. For scanned PDFs, use the Text action for on-device text recognition. Complex Word layouts may change. PDF-to-DOCX preserves available text, not a full reconstruction of the original page design.</p>
+<p>Spreadsheets: CSV, TSV and XLSX convert directly to XLSX, CSV, TSV, or PDF as offered. Multiple sheets export to a folder of CSV or TSV files. These exports use cell values; formulas use their cached results. Formatting, charts, images, and live formulas are not preserved.</p>
+<p>Subtitles: SRT and WebVTT convert to each other.</p>
+<p>Apple documents: Pages, Numbers, and Keynote files require the corresponding installed Apple app and Automation permission. PowerPoint input currently uses Keynote. Output choices vary by input.</p>
+<p>Video: MOV, MP4, M4V, AVI, MPG, MTS, M2TS, TS and 3GP inputs can export to supported MOV/MP4, HEVC-in-MP4, GIF, or M4A audio when macOS supports the codec inside. MKV, WebM and WMV are not supported. GIF exports are limited to one-minute inputs, 12 fps, and 640 × 640 maximum bounds. Silent videos cannot export audio.</p>
+<p>Folders and archives: Shift-drag a folder and drop it on ZIP to make a .zip archive beside it, the same kind Finder&#x27;s Compress makes. Drag two or more items, files or folders, and ZIP puts them all in one Archive.zip beside the first, leaving out Mac-only metadata so it opens cleanly on any system. Drop a .zip archive on Unzip, or a TAR, TAR.GZ, TGZ, TAR.BZ2, TAR.XZ, 7Z or RAR archive on Extract, to unpack it into a folder beside it; an archive that holds a single folder unpacks to that folder. A lone .gz or .bz2 file decompresses to the file inside. Password-protected archives are not supported.</p>
+<h2>Troubleshooting</h2>
+<p>If a folder is unavailable, choose another output folder or reconnect its drive. If a remembered folder permission stops working, forget saved folder permissions in Settings and select it again. If Apple-app export fails, open the required app once and check Automation permissions. Password-protected PDFs must be unlocked before conversion.</p>
+<p>Closing the window keeps Bubbleshift in the menu bar. Use Quit Bubbleshift to stop it. For further assistance, email us and include your macOS version, Bubbleshift version, input/output formats, and the error message. Do not include sensitive files by default.</p></main>
+<footer><span>© 2026 Patrik Vuić</span><nav><a href="../support/">Support</a><a href="../privacy/">Privacy policy</a></nav></footer>
+</body>
+</html>
