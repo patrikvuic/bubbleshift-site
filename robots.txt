@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://bubbleshift.io/sitemap.xml

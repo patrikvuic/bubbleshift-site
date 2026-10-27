@@ -79,3 +79,18 @@ h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.04; letter-spacing: -0.03
   .mark { width: 120px; height: 120px; }
   nav { gap: 14px; }
 }
+
+/* Guides */
+.guide { max-width: 760px; }
+.crumb { margin: 8px 0 0; font-size: 14px; }
+.lead-doc { font-size: 19px; color: var(--muted); }
+.shot { width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); margin: 20px 0 8px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4); }
+.steps { color: var(--text); padding-left: 22px; }
+.steps li { margin: 0 0 10px; }
+.cta { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin: 26px 0 8px; color: var(--muted); font-size: 14px; }
+.doc h3 { font-size: 17px; margin: 22px 0 6px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: 24px; }
+.card { display: block; padding: 20px 22px; border-radius: 16px; background: var(--panel); border: 1px solid var(--line); color: var(--text); }
+.card:hover { text-decoration: none; border-color: rgba(255, 255, 255, 0.2); }
+.card h2 { font-size: 18px; margin: 0 0 6px; }
+.card p { color: var(--muted); font-size: 14px; margin: 0; }
