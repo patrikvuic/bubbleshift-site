@@ -578,3 +578,33 @@ html.motion body { background-image: none; }
 
 /* Magnetic buttons. */
 .magnetic { transform: translate(var(--tx, 0px), var(--ty, 0px)); transition: transform 0.3s cubic-bezier(0.3, 1.5, 0.5, 1); }
+
+/* The hero copy (wrapped by motion.js) drifts with the scroll; a scroll hint bobs until you scroll. */
+.hero-copy { will-change: transform, opacity; transform-origin: 50% 0; }
+.scroll-cue { display: block; width: 26px; height: 42px; margin: 22px auto 0; border-radius: 14px; border: 2px solid rgba(255, 255, 255, 0.35);
+  position: relative; opacity: 0; animation: fade 0.8s 1.6s forwards; transition: opacity 0.3s; }
+.scroll-cue i { position: absolute; left: 50%; top: 8px; width: 4px; height: 8px; margin-left: -2px; border-radius: 2px; background: var(--accent);
+  animation: wheel 1.6s ease-in-out infinite; }
+@keyframes wheel { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(14px); opacity: 0; } 100% { opacity: 0; } }
+.hero-copy.scrolled .scroll-cue { opacity: 0 !important; animation: none; }
+@keyframes fade-in-keep { to { opacity: 1; } }
+.scroll-cue { animation-name: fade-in-keep; }
+
+@media (max-width: 760px) {
+  /* Phones: the video peeks into the first screen, cards slide in from alternating sides, and the costly live
+     blur behind cards is replaced by a tinted fill (the glass look stays). */
+  .hero { padding-top: 20px; }
+  .hero .mark { width: 92px; height: 92px; margin-bottom: 8px; }
+  .hero .eyebrow { margin-bottom: 10px; }
+  .hero .lead { font-size: 17px; margin-bottom: 20px; }
+  .hero-frame { margin-top: 26px; }
+  .scroll-cue { margin-top: 16px; }
+  .motion .reveal.from-left { transform: translateX(-36px) scale(0.98); }
+  .motion .reveal.from-right { transform: translateX(36px) scale(0.98); }
+  .motion .reveal.in { transform: none; }
+  .motion .cap.reveal.in, .motion .step.reveal.in { transform: none; }
+  .frame, .cap, .step, .local, .orb, .film-window { -webkit-backdrop-filter: none; backdrop-filter: none; }
+  .cap, .step, .local { background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.015) 55%), rgba(22, 26, 36, 0.92); }
+  .aurora i { filter: blur(60px); animation-duration: 40s; }
+  .motion .reveal { filter: none; }
+}

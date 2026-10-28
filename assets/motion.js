@@ -31,20 +31,25 @@
   // ---- Reveal on scroll, staggered among siblings ----
   const targets = ['h2.section', '.section-lead', '.step', '.cap', '.film-list li', '.feature', '.chips', '.local-grid > div',
                    '.closing > *', '.film-copy h2', '.feature h2'];
-  const io = new IntersectionObserver(entries => entries.forEach(e => {
-    if (!e.isIntersecting) return;
-    const el = e.target;
-    el.classList.add('in');
-    io.unobserve(el);
-    // Once revealed, drop the stagger delay so hover effects respond at once.
-    const done = ev => { if (ev.target === el && ev.propertyName === 'opacity') { el.classList.add('done'); el.removeEventListener('transitionend', done); } };
-    el.addEventListener('transitionend', done);
-  }), { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+  // Items that come into view together cascade in reading order; the first one reacts at once.
+  const io = new IntersectionObserver(entries => {
+    entries.filter(e => e.isIntersecting)
+      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left)
+      .forEach((e, i) => {
+        const el = e.target;
+        el.style.setProperty('--d', `${Math.min(i, 8) * 80}ms`);
+        el.classList.add('in');
+        io.unobserve(el);
+        // Once revealed, drop the delay so hover effects respond at once.
+        const done = ev => { if (ev.target === el && ev.propertyName === 'opacity') { el.classList.add('done'); el.removeEventListener('transitionend', done); } };
+        el.addEventListener('transitionend', done);
+      });
+  }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
   document.querySelectorAll(targets.join(',')).forEach(el => {
     if (el.closest('.try')) return;
-    const siblings = [...el.parentElement.children].filter(c => c.matches(targets.join(',')));
-    el.style.setProperty('--d', `${Math.min(siblings.indexOf(el), 12) * 70}ms`);
-    el.classList.add('reveal');
+    // Cards slide in from alternating sides on narrow screens.
+    const siblings = [...el.parentElement.children];
+    el.classList.add('reveal', siblings.indexOf(el) % 2 ? 'from-right' : 'from-left');
     io.observe(el);
   });
   // How-it-works loops only while visible.
@@ -81,6 +86,21 @@
     });
   }
 
+  // ---- The hero copy drifts up and fades as you scroll, so the page answers the first swipe ----
+  const hero = document.querySelector('.hero');
+  const copy = document.createElement('div');
+  copy.className = 'hero-copy';
+  if (hero) {
+    const frameEl = hero.querySelector('.hero-frame');
+    [...hero.children].filter(c => !c.classList.contains('floaters') && c !== frameEl).forEach(c => copy.append(c));
+    hero.insertBefore(copy, frameEl);
+    const cue = document.createElement('a');
+    cue.className = 'scroll-cue'; cue.href = '#how'; cue.setAttribute('aria-label', 'Scroll down');
+    cue.innerHTML = '<i></i>';
+    copy.append(cue);
+  }
+  document.querySelector('.how')?.setAttribute('id', 'how');
+
   // ---- Scroll- and pointer-linked depth, in one animation frame ----
   const heroFrame = document.querySelector('.hero-frame'), floaters = [...document.querySelectorAll('.floaters i')];
   let mouseX = 0, mouseY = 0, queued = false;
@@ -90,6 +110,10 @@
     progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
     bar?.classList.toggle('scrolled', y > 10);
     aurora.style.transform = `translate3d(0, ${-y * 0.08}px, 0)`;
+    const lift = Math.min(1, y / (h * 0.6));
+    copy.style.transform = `translate3d(0, ${y * 0.3}px, 0) scale(${1 - lift * 0.06})`;
+    copy.style.opacity = String(1 - lift * 0.85);
+    copy.classList.toggle('scrolled', y > 30);
     if (heroFrame) {
       const r = heroFrame.getBoundingClientRect(), k = Math.min(1, Math.max(0, (h - r.top) / (h * 0.9)));
       heroFrame.style.transform = `perspective(1400px) rotateX(${(1 - k) * 18}deg) scale(${0.9 + 0.1 * k})`;
