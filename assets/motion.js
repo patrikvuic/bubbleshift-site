@@ -20,12 +20,13 @@
   const split = el => {
     const words = el.textContent.trim().split(/\s+/);
     const glow = el.querySelector('.glow')?.textContent.trim();
-    el.innerHTML = words.map((w, i) => `<span class="word${glow && w === glow ? ' glow' : ''}" style="--i:${i}">${w}</span>`).join(' ');
+    // The gradient word goes inside its own span, so only the plain outer span is animated.
+    el.innerHTML = words.map((w, i) => `<span class="word" style="--i:${i}">${glow && w === glow ? `<span class="glow">${w}</span>` : w}</span>`).join(' ');
   };
   document.querySelectorAll('.hero h1, h2.section, .film-copy h2, .closing h2, .feature h2').forEach(split);
 
   // ---- Reveal on scroll, staggered among siblings ----
-  const targets = ['h2.section', '.section-lead', '.step', '.cap', '.film', '.film-list li', '.feature', '.chips', '.local-grid > div',
+  const targets = ['h2.section', '.section-lead', '.step', '.cap', '.film-list li', '.feature', '.chips', '.local-grid > div',
                    '.closing > *', '.film-copy h2', '.feature h2'];
   const io = new IntersectionObserver(entries => entries.forEach(e => {
     if (!e.isIntersecting) return;
@@ -79,7 +80,7 @@
 
   // ---- Scroll- and pointer-linked depth, in one animation frame ----
   const heroFrame = document.querySelector('.hero-frame'), floaters = [...document.querySelectorAll('.floaters i')];
-  const phone = document.querySelector('.phone-frame');
+  const tour = document.querySelector('.film-window');
   let mouseX = 0, mouseY = 0, queued = false;
   const update = () => {
     queued = false;
@@ -91,9 +92,10 @@
       const r = heroFrame.getBoundingClientRect(), k = Math.min(1, Math.max(0, (h - r.top) / (h * 0.9)));
       heroFrame.style.transform = `perspective(1400px) rotateX(${(1 - k) * 18}deg) scale(${0.9 + 0.1 * k})`;
     }
-    if (phone) {
-      const r = phone.getBoundingClientRect(), k = (r.top + r.height / 2 - h / 2) / h;
-      phone.style.transform = `perspective(1200px) rotateY(${k * -16}deg) rotateX(${k * 6}deg)`;
+    if (tour) {
+      // Tilts back while below, settles flat by the time it reaches the middle of the screen.
+      const r = tour.getBoundingClientRect(), k = Math.max(0, Math.min(1, (r.top - h * 0.25) / (h * 0.75)));
+      tour.style.transform = `perspective(1600px) rotateX(${k * 14}deg) scale(${1 - k * 0.06})`;
     }
     floaters.forEach((f, i) => {
       const depth = (i % 3 + 1) * 0.12;

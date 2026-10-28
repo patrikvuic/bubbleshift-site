@@ -105,7 +105,6 @@ h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.04; letter-spacing: -0.03
 }
 .glow {
   background: linear-gradient(100deg, #9cc4ff, #c9a8ff 45%, #7ee6f0); -webkit-background-clip: text; background-clip: text; color: transparent;
-  filter: drop-shadow(0 6px 30px rgba(140, 170, 255, 0.35));
 }
 .actions { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
 .btn-ghost {
@@ -182,21 +181,30 @@ h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.04; letter-spacing: -0.03
   border: 1px solid rgba(255, 255, 255, 0.35); box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.4), 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 22px rgba(var(--t), 0.25); }
 .orb svg { width: 24px; height: 24px; }
 
-/* The tour film */
-.film { display: grid; grid-template-columns: auto 1fr; gap: 56px; align-items: center; margin: 96px auto 0; max-width: 900px; }
-.phone-frame { position: relative; width: 300px; padding: 9px; border-radius: 40px;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.02) 55%), rgba(20, 24, 34, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.18); box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.2), 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 60px rgba(120, 150, 255, 0.18); }
-.phone-frame video { display: block; width: 100%; aspect-ratio: 9 / 16; border-radius: 32px; background: #11151d; object-fit: cover; }
-.sound { position: absolute; right: 22px; bottom: 22px; font: 600 13px -apple-system, BlinkMacSystemFont, sans-serif; color: #fff; cursor: pointer;
+/* The tour film, in a Mac window: the vertical film sharp in the middle over a blurred copy of itself. */
+.film { max-width: 1000px; margin: 96px auto 0; text-align: center; }
+.film-copy h2 { font-size: clamp(30px, 4vw, 44px); letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 16px; }
+.film-list { list-style: none; padding: 0; margin: 0 auto 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 10px; max-width: 760px; }
+.film-list li { position: relative; padding: 6px 14px 6px 30px; border-radius: 999px; font-size: 14px; color: var(--muted); background: var(--panel); border: 1px solid var(--line); }
+.film-list li::before { content: ""; position: absolute; left: 11px; top: 50%; width: 11px; height: 11px; margin-top: -5.5px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff, #9cc4ff); box-shadow: 0 0 10px rgba(156, 196, 255, 0.7); }
+.film-window { border-radius: 16px; overflow: hidden; text-align: left;
+  background: rgba(22, 26, 36, 0.9); border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 40px 100px rgba(0, 0, 0, 0.55), 0 0 80px rgba(120, 150, 255, 0.12); }
+.titlebar { position: relative; display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: linear-gradient(rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)); }
+.titlebar i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; }
+.titlebar i:nth-child(2) { background: #febc2e; }
+.titlebar i:nth-child(3) { background: #28c840; }
+.titlebar span { position: absolute; left: 0; right: 0; text-align: center; font-size: 13px; font-weight: 600; color: rgba(255, 255, 255, 0.7); pointer-events: none; }
+.film-stage { position: relative; aspect-ratio: 16 / 9; overflow: hidden; display: flex; justify-content: center; background: #0d1018; }
+.film-stage .backdrop { position: absolute; inset: 0; width: 100%; height: 100%; transform: scale(1.3);
+  filter: blur(30px) saturate(1.5) brightness(0.65); background: url(reel-poster.jpg) center / cover; }
+.film-stage #reel { position: relative; height: 100%; aspect-ratio: 9 / 16; object-fit: cover; box-shadow: 0 0 60px rgba(0, 0, 0, 0.55); }
+.sound { position: absolute; right: 16px; bottom: 16px; z-index: 2; font: 600 13px -apple-system, BlinkMacSystemFont, sans-serif; color: #fff; cursor: pointer;
   padding: 7px 13px; border-radius: 999px; background: rgba(10, 12, 20, 0.6); border: 1px solid rgba(255, 255, 255, 0.25);
   -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
-.film-copy h2 { font-size: clamp(30px, 4vw, 42px); letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 16px; }
-.film-list { list-style: none; padding: 0; margin: 0 0 26px; }
-.film-list li { padding: 7px 0 7px 30px; position: relative; color: var(--muted); }
-.film-list li::before { content: ""; position: absolute; left: 0; top: 13px; width: 16px; height: 16px; border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #fff, #9cc4ff); box-shadow: 0 0 12px rgba(156, 196, 255, 0.7); }
-.actions.left { justify-content: flex-start; }
+.film > .actions { margin-top: 28px; }
 
 /* Feature rows */
 .chip { display: inline-block; margin-bottom: 12px; padding: 4px 12px; border-radius: 999px; font-size: 13px; font-weight: 600; color: var(--accent);
@@ -223,10 +231,9 @@ h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.04; letter-spacing: -0.03
 }
 @media (max-width: 760px) {
   .steps3, .local-grid { grid-template-columns: 1fr; }
-  .film { grid-template-columns: 1fr; gap: 28px; justify-items: center; text-align: center; margin-top: 64px; }
-  .phone-frame { width: min(300px, 78vw); }
-  .film-list { display: inline-block; text-align: left; }
-  .actions.left { justify-content: center; }
+  .film { margin-top: 64px; }
+  .film-stage { aspect-ratio: 4 / 5; }
+  .film-list li { font-size: 13px; }
   .floaters { display: none; }
   .how, .caps, .formats, .local, .closing { margin-top: 64px; }
   .local { padding: 24px; }
@@ -451,9 +458,10 @@ html.motion body { background-image: none; }
 .motion .word { display: inline-block; }
 .motion .hero .mark { animation: pop 0.9s cubic-bezier(0.3, 1.6, 0.5, 1) both, bob 6s ease-in-out 1.2s infinite; }
 .motion .hero .eyebrow { animation: rise 0.8s 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-.motion .hero h1 .word { animation: word 1s cubic-bezier(0.2, 0.9, 0.3, 1.15) both; animation-delay: calc(0.3s + var(--i) * 0.13s); transform-origin: 50% 100%; }
-.motion .hero h1 .word.glow { background-size: 220% auto; animation: word 1s cubic-bezier(0.2, 0.9, 0.3, 1.15) both, shimmer 7s linear 1.6s infinite;
-  animation-delay: calc(0.3s + var(--i) * 0.13s), 1.6s; }
+/* Words rise in; "backwards" leaves no transform or filter behind, so the text renders sharp once landed.
+   The gradient word sits in its own span that is never transformed or filtered. */
+.motion .hero h1 .word { animation: word 1s cubic-bezier(0.2, 0.9, 0.3, 1.15) backwards; animation-delay: calc(0.3s + var(--i) * 0.13s); transform-origin: 50% 100%; }
+.motion .hero h1 .glow { background-size: 220% auto; animation: shimmer 7s linear 1.6s infinite; }
 .motion .hero .lead { animation: rise 0.9s 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 .motion .hero .actions { animation: rise 0.9s 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 .motion .hero .trust { animation: rise 0.9s 1.05s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
@@ -530,8 +538,8 @@ html.motion body { background-image: none; }
 .motion .feature.reveal > div:last-child { opacity: 0; transform: translateY(30px); transition: opacity 0.9s 0.35s, transform 0.9s 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
 .motion .feature.reveal.in > div:last-child { opacity: 1; transform: none; }
 
-/* The tour: depth from scrolling. */
-.motion .phone-frame { will-change: transform; }
+/* The tour window: depth from scrolling. */
+.motion .film-window { will-change: transform; }
 
 /* Formats: two marquee rows. */
 .chips-rows { display: grid; gap: 10px; margin: 26px 0 18px; overflow: hidden;

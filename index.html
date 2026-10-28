@@ -66,18 +66,33 @@
 <div class="cap"><span class="orb" style="--t:158,128,255"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span><h3>Batch queue</h3><p>Drop many files in the window and convert them together.</p></div>
 </div></section>
 <section class="film">
-<div class="phone-frame"><video id="reel" data-src="assets/reel.mp4" poster="assets/reel-poster.jpg" muted loop playsinline preload="none"
- aria-label="A 25-second tour of Bubbleshift: speed, crop, compress, audio, join and split, and saving a frame"></video>
-<button class="sound" type="button" aria-pressed="false">Sound on</button></div>
 <div class="film-copy"><span class="chip">25-second tour</span><h2>See it all in motion</h2>
-<ul class="film-list"><li>Speed up a video, or slow it down</li><li>Crop to 9:16 for Reels and Stories</li><li>Compress, with the size shown first</li>
-<li>Trim, fade and boost audio</li><li>Join clips, or split one in two</li><li>Save any frame as a picture</li></ul>
-<div class="actions left"><span class="store soon">Coming soon to the Mac App Store</span></div></div>
+<ul class="film-list"><li>Speed up or slow down video</li><li>Crop to 9:16</li><li>Compress, size shown first</li>
+<li>Trim, fade and boost audio</li><li>Join and split clips</li><li>Save any frame</li></ul></div>
+<div class="film-window">
+<div class="titlebar"><i></i><i></i><i></i><span>Bubbleshift · feature tour</span></div>
+<div class="film-stage">
+<canvas class="backdrop" width="64" height="36" aria-hidden="true"></canvas>
+<video id="reel" data-src="assets/reel.mp4" poster="assets/reel-poster.jpg" muted loop playsinline preload="none"
+ aria-label="A 25-second tour of Bubbleshift: speed, crop, compress, audio, join and split, and saving a frame"></video>
+<button class="sound" type="button" aria-pressed="false">Sound on</button>
+</div></div>
+<div class="actions"><span class="store soon">Coming soon to the Mac App Store</span></div>
 </section>
 <script>
-// Load and play the tour only when it scrolls into view; sound stays off until asked for.
+// Load and play the tour only when it scrolls into view. Behind it, a tiny canvas repainted from the film
+// itself (blurred up by CSS) fills the window's width, always in step. Sound stays off until asked for.
 (() => {
-  const video = document.getElementById('reel'), button = video.nextElementSibling;
+  const video = document.getElementById('reel'), canvas = document.querySelector('.film-stage .backdrop');
+  const button = document.querySelector('.film-stage .sound'), paint = canvas.getContext('2d');
+  let drawing = false;
+  const draw = () => {
+    if (video.paused || video.ended) { drawing = false; return; }
+    // Stretch the middle of the vertical film across the wide canvas; the blur hides the stretch.
+    if (video.videoWidth) paint.drawImage(video, 0, video.videoHeight * 0.3, video.videoWidth, video.videoHeight * 0.4, 0, 0, canvas.width, canvas.height);
+    requestAnimationFrame(draw);
+  };
+  video.addEventListener('play', () => { if (!drawing) { drawing = true; requestAnimationFrame(draw); } });
   const start = () => { if (!video.src) video.src = video.dataset.src; video.play().catch(() => {}); };
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting ? start() : video.pause()), { threshold: 0.35 }).observe(video);
