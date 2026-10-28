@@ -426,3 +426,133 @@ h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.04; letter-spacing: -0.03
 .doc.wide > h1, .doc.wide > .lead-doc { text-align: center; }
 .try .cta { justify-content: center; }
 .try-link { display: block; margin-top: 14px; font-size: 15px; }
+
+/* ---- Motion (home page): active only with html.motion, set when the visitor allows motion. ---- */
+
+/* Drifting aurora behind everything, and a scroll progress line. */
+html.motion body { background-image: none; }
+.aurora { position: fixed; inset: -10vh -10vw; z-index: -1; pointer-events: none; will-change: transform; }
+.aurora i { position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.55; will-change: transform; animation: drift 26s ease-in-out infinite alternate; }
+.aurora i:nth-child(1) { width: 55vw; height: 55vw; left: 45%; top: -12%; background: rgba(80, 120, 230, 0.5); }
+.aurora i:nth-child(2) { width: 45vw; height: 45vw; left: -12%; top: 28%; background: rgba(140, 90, 210, 0.38); animation-duration: 32s; animation-delay: -8s; }
+.aurora i:nth-child(3) { width: 40vw; height: 40vw; left: 58%; top: 68%; background: rgba(40, 170, 200, 0.3); animation-duration: 38s; animation-delay: -16s; }
+@keyframes drift { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(6vw, 4vh) scale(1.15); } 100% { transform: translate(-5vw, -3vh) scale(0.95); } }
+.progress { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 100; transform-origin: 0 50%; transform: scaleX(0);
+  background: linear-gradient(90deg, #9cc4ff, #c9a8ff, #7ee6f0); box-shadow: 0 0 12px rgba(156, 196, 255, 0.6); }
+
+/* The nav turns to frosted glass once you scroll. */
+.motion .bar { position: sticky; top: 0; z-index: 60; max-width: none; padding-left: max(16px, calc((100% - 1120px) / 2 + 16px));
+  padding-right: max(16px, calc((100% - 1120px) / 2 + 16px)); border-bottom: 1px solid transparent;
+  transition: background 0.35s, border-color 0.35s, -webkit-backdrop-filter 0.35s, backdrop-filter 0.35s; }
+.motion .bar.scrolled { background: rgba(11, 14, 20, 0.62); border-bottom-color: var(--line);
+  -webkit-backdrop-filter: blur(18px) saturate(1.6); backdrop-filter: blur(18px) saturate(1.6); }
+
+/* Hero entrance. */
+.motion .word { display: inline-block; }
+.motion .hero .mark { animation: pop 0.9s cubic-bezier(0.3, 1.6, 0.5, 1) both, bob 6s ease-in-out 1.2s infinite; }
+.motion .hero .eyebrow { animation: rise 0.8s 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.motion .hero h1 .word { animation: word 1s cubic-bezier(0.2, 0.9, 0.3, 1.15) both; animation-delay: calc(0.3s + var(--i) * 0.13s); transform-origin: 50% 100%; }
+.motion .hero h1 .word.glow { background-size: 220% auto; animation: word 1s cubic-bezier(0.2, 0.9, 0.3, 1.15) both, shimmer 7s linear 1.6s infinite;
+  animation-delay: calc(0.3s + var(--i) * 0.13s), 1.6s; }
+.motion .hero .lead { animation: rise 0.9s 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.motion .hero .actions { animation: rise 0.9s 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.motion .hero .trust { animation: rise 0.9s 1.05s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.motion .hero .floaters { animation: fade 1.6s 0.4s both; }
+.motion .hero-frame { will-change: transform; transform-origin: 50% 0; animation: fade 1s 1.1s both; }
+@keyframes pop { from { transform: scale(0.3) rotate(-20deg); opacity: 0; } }
+@keyframes bob { 50% { transform: translateY(-10px); } }
+@keyframes rise { from { opacity: 0; transform: translateY(26px); filter: blur(6px); } }
+@keyframes word { from { opacity: 0; transform: translateY(0.55em) rotateX(-70deg); filter: blur(12px); } }
+@keyframes shimmer { to { background-position: 220% center; } }
+@keyframes fade { from { opacity: 0; } }
+
+/* Reveal on scroll, staggered by --d; .done drops the delay so hover effects respond at once. */
+.motion .reveal { opacity: 0; transform: translateY(48px) scale(0.97); filter: blur(8px);
+  transition: opacity 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.9s; transition-delay: var(--d, 0ms); }
+.motion .reveal.in { opacity: 1; transform: none; filter: none; }
+.motion .reveal .word { opacity: 0; transform: translateY(0.5em); transition: opacity 0.7s, transform 0.7s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+  transition-delay: calc(var(--d, 0ms) + 120ms + var(--i) * 70ms); }
+.motion .reveal.in .word { opacity: 1; transform: none; }
+
+/* Cards: spotlight under the pointer and a gentle 3D tilt. */
+.motion .cap, .motion .step { position: relative; }
+.motion .cap.reveal.in, .motion .step.reveal.in { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); }
+.motion .cap.reveal.done, .motion .step.reveal.done { transition: transform 0.3s ease-out, border-color 0.3s; }
+.motion .cap::before, .motion .step::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(156, 196, 255, 0.2), transparent 60%); transition: opacity 0.3s; }
+.motion .cap:hover::before, .motion .step:hover::before { opacity: 1; }
+.motion .cap:hover { border-color: rgba(156, 196, 255, 0.35); }
+.motion .orb { transition: transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1); }
+.motion .cap:hover .orb { transform: translateY(-4px) scale(1.12); }
+
+/* How it works, as little loops while visible. */
+.motion .step.playing .doc-icon { animation: drag 3.6s cubic-bezier(0.45, 0, 0.25, 1) infinite; }
+@keyframes drag {
+  0%, 12% { transform: none; }
+  22% { transform: translate(-4px, -10px) rotate(-6deg) scale(1.06); box-shadow: 0 18px 30px rgba(0, 0, 0, 0.5); }
+  60% { transform: translate(46px, 6px) rotate(5deg) scale(1.06); box-shadow: 0 18px 30px rgba(0, 0, 0, 0.5); }
+  72%, 80% { transform: translate(46px, 6px) rotate(0) scale(1); opacity: 1; }
+  90% { opacity: 0; transform: translate(46px, 6px); }
+  91% { transform: none; opacity: 0; }
+  100% { opacity: 1; }
+}
+.motion .step.playing kbd { animation: press 2.4s ease-in-out infinite; }
+.motion .step.playing kbd:nth-child(2) { animation-delay: 1.2s; }
+@keyframes press {
+  0%, 30%, 100% { transform: none; }
+  8%, 18% { transform: translateY(4px); box-shadow: 0 0 0 rgba(0, 0, 0, 0.5), 0 0 22px rgba(156, 196, 255, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+    border-color: rgba(156, 196, 255, 0.7); }
+}
+.motion .mini-ring i { transform: translate(var(--x), var(--y)); }
+.motion .mini-ring i:nth-child(1) { --x: 0px; --y: -36px; }
+.motion .mini-ring i:nth-child(2) { --x: 31px; --y: -18px; }
+.motion .mini-ring i:nth-child(3) { --x: 31px; --y: 18px; }
+.motion .mini-ring i:nth-child(4) { --x: 0px; --y: 36px; }
+.motion .mini-ring i:nth-child(5) { --x: -31px; --y: 18px; }
+.motion .mini-ring i:nth-child(6) { --x: -31px; --y: -18px; }
+.motion .step.playing .mini-ring i { animation: bloom 3.6s cubic-bezier(0.3, 1.5, 0.5, 1) infinite; animation-delay: calc(var(--n, 0) * 60ms); }
+.motion .mini-ring i:nth-child(2) { --n: 1; } .motion .mini-ring i:nth-child(3) { --n: 2; } .motion .mini-ring i:nth-child(4) { --n: 3; }
+.motion .mini-ring i:nth-child(5) { --n: 4; } .motion .mini-ring i:nth-child(6) { --n: 5; }
+@keyframes bloom {
+  0% { transform: translate(0, 0) scale(0.2); opacity: 0; }
+  18%, 82% { transform: translate(var(--x), var(--y)) scale(1); opacity: 1; }
+  100% { transform: translate(0, 0) scale(0.2); opacity: 0; }
+}
+.motion .step.playing .mini-ring i:nth-child(3) { animation: bloom 3.6s cubic-bezier(0.3, 1.5, 0.5, 1) infinite, lit 3.6s ease-in-out infinite; animation-delay: 120ms, 0s; }
+@keyframes lit { 0%, 35% { box-shadow: none; } 50%, 75% { box-shadow: 0 0 22px #9cc4ff, 0 0 4px #fff; } }
+
+/* Feature rows: the screenshot wipes in and settles. */
+.motion .feature.reveal { transform: none; filter: none; }
+.motion .feature.reveal .frame { clip-path: inset(0 100% 0 0 round 20px); transform: scale(1.06);
+  transition: clip-path 1.2s cubic-bezier(0.7, 0, 0.2, 1), transform 1.6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.motion .feature.reveal:nth-of-type(odd) .frame { clip-path: inset(0 0 0 100% round 20px); }
+.motion .feature.reveal.in .frame { clip-path: inset(0 0 0 0 round 20px); transform: none; }
+.motion .feature.reveal > div:last-child { opacity: 0; transform: translateY(30px); transition: opacity 0.9s 0.35s, transform 0.9s 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.motion .feature.reveal.in > div:last-child { opacity: 1; transform: none; }
+
+/* The tour: depth from scrolling. */
+.motion .phone-frame { will-change: transform; }
+
+/* Formats: two marquee rows. */
+.chips-rows { display: grid; gap: 10px; margin: 26px 0 18px; overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.marquee { overflow: hidden; }
+.track { display: flex; width: max-content; animation: marquee 46s linear infinite; }
+.marquee.reverse .track { animation-direction: reverse; animation-duration: 52s; }
+.chips-rows:hover .track { animation-play-state: paused; }
+.track span { margin-right: 8px; padding: 6px 13px; border-radius: 999px; font-size: 14px; font-weight: 600; white-space: nowrap;
+  background: var(--panel); border: 1px solid var(--line); transition: border-color 0.2s, color 0.2s; }
+.track span:hover { border-color: rgba(156, 196, 255, 0.5); color: var(--accent); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+/* Privacy band and closing call. */
+.motion .local .orb { animation: breathe 4.5s ease-in-out infinite; }
+.motion .local-grid > div:nth-child(2) .orb { animation-delay: -1.5s; }
+.motion .local-grid > div:nth-child(3) .orb { animation-delay: -3s; }
+@keyframes breathe { 50% { transform: scale(1.08); box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.4), 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 34px rgba(var(--t), 0.55); } }
+.motion .closing img { animation: bob 6s ease-in-out infinite; }
+.motion .closing .store:not(.soon), .motion .closing .store { animation: halo 3s ease-in-out infinite; }
+@keyframes halo { 50% { box-shadow: 0 0 0 8px rgba(156, 196, 255, 0.12), 0 0 40px rgba(156, 196, 255, 0.35); } }
+
+/* Magnetic buttons. */
+.magnetic { transform: translate(var(--tx, 0px), var(--ty, 0px)); transition: transform 0.3s cubic-bezier(0.3, 1.5, 0.5, 1); }
