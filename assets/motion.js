@@ -18,10 +18,13 @@
 
   // ---- Split headings into words that rise in one after another ----
   const split = el => {
+    const hidden = el.querySelector('.visually-hidden');
+    hidden?.remove();
     const words = el.textContent.trim().split(/\s+/);
     const glow = el.querySelector('.glow')?.textContent.trim();
     // The gradient word goes inside its own span, so only the plain outer span is animated.
     el.innerHTML = words.map((w, i) => `<span class="word" style="--i:${i}">${glow && w === glow ? `<span class="glow">${w}</span>` : w}</span>`).join(' ');
+    if (hidden) el.prepend(hidden);
   };
   document.querySelectorAll('.hero h1, h2.section, .film-copy h2, .closing h2, .feature h2').forEach(split);
 

@@ -1,0 +1,60 @@
+# Bubbleshift
+
+> Bubbleshift is a file converter for Mac (macOS 13+, Apple silicon), sold once for €4.99 on the Mac App Store. Start dragging a file in Finder, tap Shift and drop it on a format; tap Command for actions; tap Option for file commands. The new file appears beside the original. Everything runs on the Mac: no uploads, no account, no tracking, works offline.
+
+## What it does
+
+- Convert HEIC to JPG, PNG, AVIF and more
+- Convert MOV to MP4, video to GIF, video to M4A audio
+- Convert PDF to Word (DOCX), images and text
+- Convert DOCX, Markdown, Pages to PDF
+- Convert XLSX to CSV and back
+- Compress photos, PDFs, videos and audio
+- Merge PDFs and images into one PDF
+- Resize images in bulk
+- Crop images and trim videos
+- Remove location and metadata from photos
+- Extract text from images and scanned PDFs
+- Remove image backgrounds
+- Zip folders; open ZIP, RAR, 7Z and TAR archives
+- AirDrop, copy path and other file commands
+
+## Questions
+
+**What is Bubbleshift?** A file converter for Mac. Start dragging a file in Finder, tap Shift and drop it on the format you need; tap Command for actions like Compress, Merge PDFs, Resize, Crop, Trim or Remove background. The new file appears beside the original.
+
+**Does Bubbleshift upload my files?** No. Every conversion runs on your Mac. There are no uploads, no account and no tracking, and it works offline.
+
+**Which formats can it convert?** Photos (HEIC, JPG, PNG, AVIF, WebP, RAW and more), PDFs, Word, Pages, Markdown, Excel, CSV, Numbers, Keynote and PowerPoint, videos (MOV, MP4, GIF), audio (M4A, WAV, FLAC, AIFF, MP3 input), subtitles and archives (ZIP, RAR, 7Z, TAR).
+
+**How much does it cost?** €4.99 once on the Mac App Store. No subscription and no in-app purchases.
+
+**Which Macs does it run on?** Macs with Apple silicon running macOS 13 Ventura or later. Background removal needs macOS 14.
+
+**Is it better than an online converter?** For private files, yes: nothing leaves your Mac, there are no file-size limits or watermarks, and it converts whole selections from Finder in one drag.
+
+## Guides
+
+- [How to convert HEIC to JPG on a Mac](https://bubbleshift.io/convert-heic-to-jpg-on-mac/): Turn iPhone HEIC photos into JPG on your Mac in seconds, one or many at a time, without uploading them to an online converter.
+- [How to merge PDF files on a Mac](https://bubbleshift.io/merge-pdf-files-on-mac/): Combine several PDFs, or PDFs and images, into one PDF on your Mac and choose the page order, without uploading your documents.
+- [How to reduce the size of a PDF on a Mac](https://bubbleshift.io/compress-pdf-on-mac/): Make a large PDF small enough to email or upload, on your Mac, while keeping text sharp and selectable. No online upload needed.
+- [How to remove location data from photos on a Mac](https://bubbleshift.io/remove-location-from-photos-on-mac/): Strip GPS location, capture date and camera details from photos on your Mac before sharing them, while keeping the picture itself unchanged.
+- [How to open RAR and 7Z files on a Mac](https://bubbleshift.io/open-rar-and-7z-files-on-mac/): Extract RAR, 7Z, TAR.GZ and other archives on your Mac with a quick drag, or zip folders to share them.
+- [How to convert RAW photos to JPG on a Mac](https://bubbleshift.io/convert-raw-photos-to-jpg-on-mac/): Turn camera RAW files (Canon CR3, Nikon NEF, Sony ARW, Fujifilm RAF, DNG) into JPG on your Mac with a single drag.
+- [How to compress a video on a Mac](https://bubbleshift.io/compress-video-on-mac/): Make a large video small enough to send or upload, on your Mac, without an online compressor. Works with MOV and MP4 from iPhone or screen recordings.
+- [How to convert MOV to MP4 on a Mac](https://bubbleshift.io/convert-mov-to-mp4-on-mac/): Turn iPhone and QuickTime MOV videos into MP4 on your Mac, usually in seconds and without losing quality. No upload needed.
+- [How to make a GIF from a video on a Mac](https://bubbleshift.io/convert-video-to-gif-on-mac/): Make a GIF from a short video or screen recording on your Mac with one drag. No online GIF maker, no watermark.
+- [How to resize images in bulk on a Mac](https://bubbleshift.io/resize-images-on-mac/): Resize one photo or a whole folder of images on your Mac in one drag: 50%, 1080, 2048 or 3840 pixels, keeping format and metadata.
+- [How to convert WebP images to JPG on a Mac](https://bubbleshift.io/convert-webp-to-jpg-on-mac/): Turn WebP images saved from websites into JPG or PNG on your Mac, so they open in every app. One drag, no upload.
+- [How to convert a PDF to Word on a Mac](https://bubbleshift.io/convert-pdf-to-word-on-mac/): Get an editable Word document from a PDF on your Mac without uploading it. Keeps the text, fonts and sizes, one page per page.
+- [How to extract the audio from a video on a Mac](https://bubbleshift.io/extract-audio-from-video-on-mac/): Save just the sound of a video as an M4A audio file on your Mac: interviews, lectures, music. One drag, nothing uploaded.
+- [How to remove a photo's background on a Mac](https://bubbleshift.io/remove-background-from-image-on-mac/): Cut out the subject of a photo as a transparent PNG on your Mac, in one drag. Private and offline, no online background remover.
+- [How to copy text from an image or scan on a Mac](https://bubbleshift.io/copy-text-from-image-on-mac/): Extract the text from screenshots, photos and scanned PDFs on your Mac into a text file. Fast, private text recognition (OCR).
+- [How to trim a video on a Mac](https://bubbleshift.io/trim-video-on-mac/): Cut the start and end of a video on your Mac with a filmstrip and two handles, frame-accurately. Keeps MOV or MP4.
+
+## Pages
+
+- [Home](https://bubbleshift.io/): overview, feature tour and an in-browser demo
+- [Try it](https://bubbleshift.io/try/): interactive demo of the drag selector
+- [Support](https://bubbleshift.io/support/): full feature reference and contact
+- [Privacy](https://bubbleshift.io/privacy/): no data collection
