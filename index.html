@@ -41,6 +41,9 @@
 <video id="reel" data-src="assets/tour.mp4" poster="assets/tour-poster.jpg" muted loop playsinline preload="none"
  aria-label="A tour of Bubbleshift: converting with Shift, actions with Command (speed, compress, resize, crop, merge, audio, join and split, saving a frame) and file commands with Option"></video>
 <button class="sound" type="button" aria-pressed="false">Sound on</button>
+<div class="loop" aria-hidden="true"><div class="loop-ring"><i style="--n:0"><b>PNG</b></i><i style="--n:1"><b>JPG</b></i><i style="--n:2"><b>AVIF</b></i><i style="--n:3"><b>TIFF</b></i><i style="--n:4"><b>GIF</b></i><i style="--n:5"><b>BMP</b></i><i style="--n:6"><b>PDF</b></i><i style="--n:7"><b>ICO</b></i><span class="loop-hub"><span class="loop-photo"></span><b>HEIC</b></span></div>
+<span class="loop-result"><span class="loop-photo"></span><b>Coast.jpg</b></span><p class="loop-caption">Tap ⇧ to convert</p></div>
+<button class="play" type="button" aria-label="Play the tour"><span></span></button>
 </div></div>
 </section>
 <section class="how"><h2 class="section">How it works</h2>
@@ -77,17 +80,28 @@
 <div class="cap"><span class="orb" style="--t:158,128,255"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span><h3>Batch queue</h3><p>Drop many files in the window and convert them together.</p></div>
 </div></section>
 <script>
-// Load and play the tour only when it scrolls into view; sound stays off until asked for.
+// Load and play the tour only when it scrolls into view; sound stays off until asked for. When the browser won't
+// autoplay (iPhone Low Power Mode, data saving), a CSS loop plays instead, with a button that starts the video.
 (() => {
-  const video = document.getElementById('reel'), button = document.querySelector('.film-stage .sound');
-  const start = () => { if (!video.src) video.src = video.dataset.src; video.play().catch(() => {}); };
+  const video = document.getElementById('reel'), stage = video.closest('.film-stage');
+  const sound = stage.querySelector('.sound'), play = stage.querySelector('.play');
+  const blocked = () => stage.classList.add('no-autoplay');
+  const start = () => {
+    if (!video.src) video.src = video.dataset.src;
+    const attempt = video.play();
+    if (attempt) attempt.then(() => stage.classList.remove('no-autoplay')).catch(blocked);
+    // Some browsers neither play nor refuse; treat a video still paused after a moment as blocked.
+    setTimeout(() => { if (video.paused) blocked(); }, 2500);
+  };
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(entries => entries.forEach(e => e.isIntersecting ? start() : video.pause()), { threshold: 0.35 }).observe(video);
   } else start();
-  button.addEventListener('click', () => {
+  video.addEventListener('playing', () => stage.classList.remove('no-autoplay'));
+  play.addEventListener('click', () => { stage.classList.remove('no-autoplay'); start(); });
+  sound.addEventListener('click', () => {
     video.muted = !video.muted; start();
-    button.textContent = video.muted ? 'Sound on' : 'Sound off';
-    button.setAttribute('aria-pressed', String(!video.muted));
+    sound.textContent = video.muted ? 'Sound on' : 'Sound off';
+    sound.setAttribute('aria-pressed', String(!video.muted));
   });
 })();
 </script>

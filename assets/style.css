@@ -266,6 +266,51 @@ h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.04; letter-spacing: -0.03
 .related { padding-left: 20px; }
 .related li { margin: 0 0 8px; }
 
+/* The tour's stand-in when autoplay is blocked (Low Power Mode): a CSS loop of the Shift ring, and a play button. */
+.loop, .film-stage .play { display: none; }
+.film-stage.no-autoplay .loop, .film-stage.no-autoplay .play { display: block; }
+.film-stage.no-autoplay #reel, .film-stage.no-autoplay .sound { visibility: hidden; }
+.loop { position: absolute; inset: 0; overflow: hidden; container-type: size;
+  background: radial-gradient(60% 70% at 20% 20%, rgba(150, 90, 200, 0.75), transparent 70%),
+              radial-gradient(60% 70% at 85% 85%, rgba(50, 140, 230, 0.75), transparent 70%), #2b3a7a; }
+.loop-ring { position: absolute; left: 66%; top: 52%; width: 0; height: 0; --r: 31cqh; --d: 15cqh; }
+.loop-ring i, .loop-hub { position: absolute; border-radius: 50%; display: grid; place-items: center; color: #fff; font-style: normal;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.05) 55%, rgba(0, 0, 0, 0.1)), rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.55); box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.4), 0 8px 20px rgba(0, 0, 0, 0.25); }
+.loop-ring i { width: var(--d); height: var(--d); margin: calc(var(--d) / -2) 0 0 calc(var(--d) / -2); font-size: 3.2cqh;
+  --a: calc(var(--n) * 45deg - 90deg); animation: bloom-out 6s cubic-bezier(0.3, 1.4, 0.5, 1) infinite; animation-delay: calc(var(--n) * 50ms); }
+.loop-ring i b, .loop-hub b { font-weight: 700; }
+.loop-ring i:nth-child(2) { animation-name: bloom-out, pick; }
+.loop-hub { width: 27cqh; height: 27cqh; margin: -13.5cqh 0 0 -13.5cqh; font-size: 4.5cqh; flex-direction: column; display: flex; justify-content: center;
+  gap: 1cqh; animation: hub 6s ease-in-out infinite; }
+.loop-photo { display: block; width: 11cqh; height: 7cqh; border-radius: 1cqh;
+  background: linear-gradient(transparent 55%, #1f5a85 55%), linear-gradient(#9cc4ff, #f8b48a); border: 0.4cqh solid #fff; }
+.loop-result { position: absolute; left: 66%; top: 52%; display: flex; flex-direction: column; align-items: center; gap: 2cqh; color: #fff;
+  transform: translate(-50%, -50%); font-size: 4cqh; opacity: 0; animation: result 6s cubic-bezier(0.3, 1.5, 0.5, 1) infinite; }
+.loop-result .loop-photo { width: 30cqh; height: 20cqh; }
+.loop-result b { padding: 0.4cqh 1.6cqh; border-radius: 1cqh; background: #3772e0; }
+.loop-caption { position: absolute; left: 6%; top: 50%; transform: translateY(-50%); margin: 0; width: 34%; color: #fff;
+  font-size: 9cqh; font-weight: 800; letter-spacing: -0.03em; line-height: 1.05; animation: caption 6s ease-in-out infinite; }
+@keyframes bloom-out {
+  0%, 4% { transform: translate(0, 0) scale(0.2); opacity: 0; }
+  14%, 52% { transform: rotate(var(--a)) translate(var(--r)) rotate(calc(-1 * var(--a))) scale(1); opacity: 1; }
+  62%, 100% { transform: translate(0, 0) scale(0.2); opacity: 0; }
+}
+@keyframes pick {
+  0%, 30% { box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.4), 0 8px 20px rgba(0, 0, 0, 0.25); }
+  36%, 52% { box-shadow: 0 0 0 0.6cqh rgba(156, 196, 255, 0.6), 0 0 4cqh rgba(156, 196, 255, 0.9); }
+}
+@keyframes hub { 0%, 4% { transform: scale(0.6); opacity: 0; } 12%, 54% { transform: scale(1); opacity: 1; } 58% { transform: scale(0.84); opacity: 1; } 64%, 100% { transform: scale(0.6); opacity: 0; } }
+@keyframes result { 0%, 64% { opacity: 0; transform: translate(-50%, -50%) scale(0.4); } 72%, 92% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); } }
+@keyframes caption { 0% { opacity: 0; transform: translateY(-40%); } 10%, 90% { opacity: 1; transform: translateY(-50%); } 100% { opacity: 0; } }
+.film-stage .play { position: absolute; right: 3.5%; bottom: 6%; width: 64px; height: 64px; border-radius: 50%; cursor: pointer; z-index: 3;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.06)), rgba(10, 12, 20, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.6); box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35); animation: halo 2.4s ease-in-out infinite; }
+.film-stage .play span { position: absolute; left: 50%; top: 50%; margin: -11px 0 0 -7px; border-left: 20px solid #fff;
+  border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
+@keyframes halo { 50% { box-shadow: 0 0 0 8px rgba(156, 196, 255, 0.15), 0 0 30px rgba(156, 196, 255, 0.4); } }
+@media (max-width: 760px) { .film-stage .play { width: 48px; height: 48px; left: 4%; right: auto; } .film-stage .play span { margin: -9px 0 0 -5px; border-left-width: 16px; border-top-width: 10px; border-bottom-width: 10px; } }
+
 /* The Bubbleshift try-out: a pretend desktop where the drag selector works in the browser. */
 .try { margin: 56px 0 0; text-align: center; }
 .try > h2 { font-size: clamp(28px, 4vw, 40px); letter-spacing: -0.02em; line-height: 1.12; margin: 0 0 10px; }
