@@ -125,7 +125,6 @@ h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.04; letter-spacing: -0.03
 }
 .frame { padding: 8px; border-radius: 20px; }
 .hero-frame { margin-top: 44px; }
-.hero-frame .demo { margin: 0; border: 0; box-shadow: none; border-radius: 14px; }
 
 /* Floating bubbles behind the hero. */
 .floaters { position: absolute; inset: -40px 0 auto; height: 620px; pointer-events: none; overflow: visible; }

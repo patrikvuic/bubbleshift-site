@@ -80,7 +80,6 @@
 
   // ---- Scroll- and pointer-linked depth, in one animation frame ----
   const heroFrame = document.querySelector('.hero-frame'), floaters = [...document.querySelectorAll('.floaters i')];
-  const tour = document.querySelector('.film-window');
   let mouseX = 0, mouseY = 0, queued = false;
   const update = () => {
     queued = false;
@@ -91,11 +90,6 @@
     if (heroFrame) {
       const r = heroFrame.getBoundingClientRect(), k = Math.min(1, Math.max(0, (h - r.top) / (h * 0.9)));
       heroFrame.style.transform = `perspective(1400px) rotateX(${(1 - k) * 18}deg) scale(${0.9 + 0.1 * k})`;
-    }
-    if (tour) {
-      // Tilts back while below, settles flat by the time it reaches the middle of the screen.
-      const r = tour.getBoundingClientRect(), k = Math.max(0, Math.min(1, (r.top - h * 0.25) / (h * 0.75)));
-      tour.style.transform = `perspective(1600px) rotateX(${k * 14}deg) scale(${1 - k * 0.06})`;
     }
     floaters.forEach((f, i) => {
       const depth = (i % 3 + 1) * 0.12;
