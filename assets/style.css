@@ -209,7 +209,7 @@ h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.04; letter-spacing: -0.03
 
 /* Formats */
 .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 900px; margin: 26px auto 18px; }
-.chips span { padding: 6px 13px; border-radius: 999px; font-size: 14px; font-weight: 600; background: var(--panel); border: 1px solid var(--line); }
+.chips span, .chips a { padding: 6px 13px; border-radius: 999px; font-size: 14px; font-weight: 600; background: var(--panel); border: 1px solid var(--line); }
 .formats .section-lead { font-size: 14px; }
 
 /* Privacy band */
@@ -310,6 +310,8 @@ h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.04; letter-spacing: -0.03
   border-top: 12px solid transparent; border-bottom: 12px solid transparent; }
 @keyframes halo { 50% { box-shadow: 0 0 0 8px rgba(156, 196, 255, 0.15), 0 0 30px rgba(156, 196, 255, 0.4); } }
 @media (max-width: 760px) { .film-stage .play { width: 48px; height: 48px; left: 4%; right: auto; } .film-stage .play span { margin: -9px 0 0 -5px; border-left-width: 16px; border-top-width: 10px; border-bottom-width: 10px; } }
+.chips.links a { color: inherit; text-decoration: none; transition: background .2s, border-color .2s; }
+.chips.links a:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.28); }
 
 /* The Bubbleshift try-out: a pretend desktop where the drag selector works in the browser. */
 .try { margin: 56px 0 0; text-align: center; }
@@ -380,6 +382,7 @@ h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.04; letter-spacing: -0.03
 .thumb { width: 64px; height: 44px; object-fit: cover; border-radius: 3px; border: 2px solid #fff; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4); }
 .thumb.cut { filter: saturate(1.4) contrast(1.1); background: repeating-conic-gradient(#ddd 0 25%, #fff 0 50%) 0 0 / 10px 10px; }
 .thumb.cropped { width: 46px; height: 46px; object-position: 72% 60%; }
+.thumb.collage { width: 70px; height: 48px; box-shadow: -7px -6px 0 -2px #fff, -7px -6px 0 -1px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.4); }
 .icon svg { width: 60px; height: 60px; }
 
 /* Dragged files */

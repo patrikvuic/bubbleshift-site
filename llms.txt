@@ -11,8 +11,15 @@
 - Convert XLSX to CSV and back
 - Compress photos, PDFs, videos and audio
 - Merge PDFs and images into one PDF
-- Resize images in bulk
-- Crop images and trim videos
+- Join videos or audio tracks
+- Make a collage from several photos
+- Resize images in bulk, and videos to 720p, 1080p or 4K
+- Rotate and flip photos and videos
+- Crop images and videos (incl. 9:16)
+- Trim and split videos, save a frame
+- Change video speed (0.5× to 4×)
+- Trim audio, make it louder, fade, mono or stereo
+- Make scanned PDFs searchable
 - Remove location and metadata from photos
 - Extract text from images and scanned PDFs
 - Remove image backgrounds
@@ -21,7 +28,7 @@
 
 ## Questions
 
-**What is Bubbleshift?** A file converter for Mac. Start dragging a file in Finder, tap Shift and drop it on the format you need; tap Command for actions like Compress, Merge PDFs, Resize, Crop, Trim or Remove background. The new file appears beside the original.
+**What is Bubbleshift?** A file converter for Mac. Start dragging a file in Finder, tap Shift and drop it on the format you need; tap Command for actions like Compress, Merge PDFs, Collage, Resize, Rotate, Crop, Trim, Speed or Remove background. The new file appears beside the original.
 
 **Does Bubbleshift upload my files?** No. Every conversion runs on your Mac. There are no uploads, no account and no tracking, and it works offline.
 
@@ -37,6 +44,9 @@
 
 - [How to convert HEIC to JPG on a Mac](https://bubbleshift.io/convert-heic-to-jpg-on-mac/): Turn iPhone HEIC photos into JPG on your Mac in seconds, one or many at a time, without uploading them to an online converter.
 - [How to merge PDF files on a Mac](https://bubbleshift.io/merge-pdf-files-on-mac/): Combine several PDFs, or PDFs and images, into one PDF on your Mac and choose the page order, without uploading your documents.
+- [How to make a photo collage on a Mac](https://bubbleshift.io/make-a-photo-collage-on-mac/): Put several photos into one image on your Mac: side by side, stacked, in a grid or placed freely, at full resolution and without uploading them.
+- [How to combine videos on a Mac](https://bubbleshift.io/combine-videos-on-mac/): Join several video clips into one MOV or MP4 on your Mac, in the order you choose, without uploading them or opening a video editor.
+- [How to reduce the file size of photos on a Mac](https://bubbleshift.io/compress-photos-on-mac/): Make photos smaller on your Mac: pick Low, Medium or High compression and see the new size before you choose. JPEG, HEIC and PNG.
 - [How to reduce the size of a PDF on a Mac](https://bubbleshift.io/compress-pdf-on-mac/): Make a large PDF small enough to email or upload, on your Mac, while keeping text sharp and selectable. No online upload needed.
 - [How to remove location data from photos on a Mac](https://bubbleshift.io/remove-location-from-photos-on-mac/): Strip GPS location, capture date and camera details from photos on your Mac before sharing them, while keeping the picture itself unchanged.
 - [How to open RAR and 7Z files on a Mac](https://bubbleshift.io/open-rar-and-7z-files-on-mac/): Extract RAR, 7Z, TAR.GZ and other archives on your Mac with a quick drag, or zip folders to share them.
@@ -51,6 +61,14 @@
 - [How to remove a photo's background on a Mac](https://bubbleshift.io/remove-background-from-image-on-mac/): Cut out the subject of a photo as a transparent PNG on your Mac, in one drag. Private and offline, no online background remover.
 - [How to copy text from an image or scan on a Mac](https://bubbleshift.io/copy-text-from-image-on-mac/): Extract the text from screenshots, photos and scanned PDFs on your Mac into a text file. Fast, private text recognition (OCR).
 - [How to trim a video on a Mac](https://bubbleshift.io/trim-video-on-mac/): Cut the start and end of a video on your Mac with a filmstrip and two handles, frame-accurately. Keeps MOV or MP4.
+- [How to crop a video to vertical 9:16 on a Mac](https://bubbleshift.io/crop-video-to-9-16-on-mac/): Turn a landscape video into a vertical 9:16 one on your Mac for Reels, TikTok or Shorts, or crop to 1:1, 4:3 or 16:9. No upload.
+- [How to rotate a video on a Mac](https://bubbleshift.io/rotate-video-on-mac/): Rotate a sideways video by 90° or 180°, or mirror it, on your Mac without re-encoding, so quality stays exactly the same.
+- [How to speed up or slow down a video on a Mac](https://bubbleshift.io/speed-up-video-on-mac/): Make a video 1.5×, 2× or 4× faster, or half speed, on your Mac. The sound keeps its pitch. No video editor or upload needed.
+- [How to split a video into two parts on a Mac](https://bubbleshift.io/split-video-on-mac/): Cut a video into two separate files at the exact moment you choose, on your Mac, frame-accurately and without uploading it.
+- [How to save a frame from a video as an image on a Mac](https://bubbleshift.io/save-a-frame-from-video-on-mac/): Grab a sharp still image from any moment of a video on your Mac, saved as a full-resolution PNG, instead of a blurry screenshot.
+- [How to make an audio file louder on a Mac](https://bubbleshift.io/make-audio-louder-on-mac/): Raise the volume of a quiet recording on your Mac without distortion: the loudest moment is brought up to just below clipping.
+- [How to combine audio files on a Mac](https://bubbleshift.io/combine-audio-files-on-mac/): Join several audio files or voice memos into one track on your Mac, in your order. WAV, AIFF and FLAC stay lossless.
+- [How to make a scanned PDF searchable on a Mac](https://bubbleshift.io/make-pdf-searchable-on-mac/): Add a hidden text layer to a scanned PDF on your Mac so you can search, select and copy its text. The scan looks exactly the same.
 
 ## Pages
 
