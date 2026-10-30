@@ -19,25 +19,27 @@
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Bubbleshift", "alternateName": "Bubbleshift – Drag & Convert", "url": "https://bubbleshift.io/", "operatingSystem": "macOS 13 or later", "applicationCategory": "UtilitiesApplication", "applicationSubCategory": "File converter", "description": "A local file converter for Mac. Start dragging a file in Finder, tap Shift and drop it on a format; tap Command for actions such as compress, merge PDFs, collage, resize, rotate, crop, trim, change speed and remove background. Files never leave the Mac.", "featureList": ["Convert HEIC to JPG, PNG, AVIF and more", "Convert MOV to MP4, video to GIF, video to M4A audio", "Convert PDF to Word (DOCX), images and text", "Convert DOCX, Markdown, Pages to PDF", "Convert XLSX to CSV and back", "Compress photos, PDFs, videos and audio", "Merge PDFs and images into one PDF", "Join videos or audio tracks", "Make a collage from several photos", "Resize images in bulk, and videos to 720p, 1080p or 4K", "Rotate and flip photos and videos", "Crop images and videos (incl. 9:16)", "Trim and split videos, save a frame", "Change video speed (0.5× to 4×)", "Trim audio, make it louder, fade, mono or stereo", "Make scanned PDFs searchable", "Remove location and metadata from photos", "Extract text from images and scanned PDFs", "Remove image backgrounds", "Zip folders; open ZIP, RAR, 7Z and TAR archives", "AirDrop, copy path and other file commands"], "screenshot": "https://bubbleshift.io/assets/shift.jpg", "softwareRequirements": "macOS 13 or later (Apple silicon)", "offers": {"@type": "Offer", "price": "4.99", "priceCurrency": "EUR"}, "author": {"@type": "Person", "name": "Patrik Vuić"}}</script>
 <link rel="icon" href="../assets/icon-64.png">
 <link rel="apple-touch-icon" href="../assets/icon-180.png">
-<link rel="stylesheet" href="../assets/style.css?v=02d5ea3877">
+<link rel="stylesheet" href="../assets/style.css?v=029a6ad58b">
 </head>
 <body>
 <header class="bar"><a class="brand" href="../"><img src="../assets/mark-128.png" alt="" width="32" height="32">Bubbleshift</a>
 <nav><a href="../try/">Try it</a><a href="../guides/">Guides</a><a href="../support/">Support</a></nav></header>
-<main class="doc"><form class="contact feedback" id="feedback" data-to="contact@bubbleshift.io">
+<main class="doc"><form class="contact feedback" id="feedback" data-to="contact@bubbleshift.io" novalidate>
 <h2>Report a bug or suggest a feature</h2>
-<p>Pick what it's about, write a line or two, and press Send: your mail app opens with the message ready to go to <a href="mailto:contact@bubbleshift.io">contact@bubbleshift.io</a>. Nothing is sent from this page. Please don't attach private files unless we ask and you choose to share them.</p>
+<p>Pick what it's about, write a line or two, and press Send. It comes straight to us. Add your email if you'd like a reply. Please don't paste anything private.</p>
 <fieldset class="kinds"><legend class="visually-hidden">What is it about?</legend>
 <label><input type="radio" name="kind" value="bug" checked><span>Bug</span></label>
 <label><input type="radio" name="kind" value="feature"><span>Feature idea</span></label>
 <label><input type="radio" name="kind" value="question"><span>Question</span></label>
 </fieldset>
 <label class="field">Summary<input name="summary" maxlength="120" placeholder="e.g. Merging two PDFs keeps the wrong order" autocomplete="off"></label>
-<label class="field">Details<textarea name="details" rows="7"></textarea></label>
-<div class="versions"><label class="field">macOS version<input name="macos" placeholder="e.g. 15.1" autocomplete="off"></label>
-<label class="field">Bubbleshift version<input name="app" placeholder="Bubbleshift › About" autocomplete="off"></label></div>
-<div class="send"><button class="btn-solid" type="submit">Send</button><button class="btn-ghost copy" type="button">Copy address</button></div>
-<p class="sent" hidden>Your mail app should open now. If it doesn't (Gmail or another webmail in the browser), copy the address and send it from there.</p>
+<label class="field">Details<textarea name="details" rows="7" maxlength="5000"></textarea></label>
+<div class="versions"><label class="field">macOS version<input name="macos" maxlength="40" placeholder="e.g. 15.1" autocomplete="off"></label>
+<label class="field">Bubbleshift version<input name="app" maxlength="40" placeholder="Bubbleshift › About" autocomplete="off"></label></div>
+<label class="field">Your email <span class="optional">(optional, for a reply)</span><input name="email" type="email" maxlength="200" placeholder="you@example.com" autocomplete="email"></label>
+<label class="trap" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+<div class="send"><button class="btn-solid" type="submit">Send</button><span class="alt">or email <a href="mailto:contact@bubbleshift.io">contact@bubbleshift.io</a></span></div>
+<p class="status" role="status" hidden></p>
 </form>
 <h1>Using Bubbleshift</h1>
 <h2>Convert a file</h2>
@@ -82,14 +84,15 @@
 <p>Closing the window keeps Bubbleshift in the menu bar. Use Quit Bubbleshift to stop it. For further assistance, email us and include your macOS version, Bubbleshift version, input/output formats, and the error message. Do not include sensitive files by default.</p></main>
 <script>
 (() => {
-  const form = document.getElementById('feedback'), to = form.dataset.to;
+  const form = document.getElementById('feedback');
   const templates = {
     bug: 'What happened:\n\n\nWhat I expected:\n\n\nSteps (file type, format or action chosen):\n\n',
     feature: 'What I would like Bubbleshift to do:\n\n\nWhy it would help:\n\n',
     question: '',
   };
   const kind = () => form.querySelector('input[name=kind]:checked').value;
-  const details = form.querySelector('textarea'), versions = form.querySelector('.versions');
+  const details = form.details, versions = form.querySelector('.versions'), status = form.querySelector('.status');
+  const button = form.querySelector('button[type=submit]');
   // Fill the details with the chosen kind's prompts, unless the visitor has typed their own.
   let typed = false;
   details.addEventListener('input', () => { typed = details.value.trim() !== '' && details.value !== templates[kind()]; });
@@ -99,20 +102,24 @@
   };
   form.querySelectorAll('input[name=kind]').forEach(r => r.addEventListener('change', choose));
   choose();
-  form.addEventListener('submit', e => {
+  const say = (text, tone) => { status.textContent = text; status.dataset.tone = tone || ''; status.hidden = false; };
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    const label = { bug: 'Bug', feature: 'Feature idea', question: 'Question' }[kind()];
-    const summary = form.summary.value.trim();
-    let body = details.value.trim();
-    if (kind() === 'bug') body += '\n\nmacOS: ' + (form.macos.value.trim() || '?') + '\nBubbleshift: ' + (form.app.value.trim() || '?');
-    location.href = 'mailto:' + to + '?subject=' + encodeURIComponent('Bubbleshift ' + label + (summary ? ': ' + summary : ''))
-      + '&body=' + encodeURIComponent(body + '\n');
-    form.querySelector('.sent').hidden = false;
+    const text = details.value.trim();
+    if (!form.summary.value.trim() && (!text || text === templates[kind()].trim())) { say('Write a few words about it first.', 'error'); return; }
+    button.disabled = true; say('Sending…');
+    const data = Object.fromEntries(['summary', 'details', 'macos', 'app', 'email', 'website'].map(n => [n, form[n].value]));
+    data.kind = kind();
+    try {
+      const response = await fetch('/api/feedback', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.message || 'The message couldn’t be sent just now.');
+      form.reset(); typed = false; choose();
+      say(result.message || 'Thanks! Your message is on its way.', 'ok');
+    } catch (error) {
+      say(error.message + ' You can also email ' + form.dataset.to + '.', 'error');
+    } finally { button.disabled = false; }
   });
-  const copy = form.querySelector('.copy');
-  copy.addEventListener('click', () => navigator.clipboard.writeText(to).then(() => {
-    copy.textContent = 'Copied'; setTimeout(() => copy.textContent = 'Copy address', 1800);
-  }));
 })();
 </script>
 <footer><span>© 2026 Patrik Vuić</span><nav><a href="../guides/">Guides</a><a href="../support/">Support</a><a href="../support/#feedback">Report a bug</a><a href="../privacy/">Privacy policy</a></nav></footer>

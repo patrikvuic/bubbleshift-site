@@ -329,7 +329,13 @@ h1 { font-size: clamp(40px, 7vw, 76px); line-height: 1.04; letter-spacing: -0.03
 .feedback .versions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 .feedback .versions[hidden] { display: none; }
 .feedback .send { display: flex; flex-wrap: wrap; gap: 10px; }
-.feedback .sent { color: var(--muted); font-size: 14px; }
+.feedback .send { align-items: center; }
+.feedback .alt, .feedback .optional { color: var(--muted); font-size: 14px; }
+.feedback .status { font-size: 15px; color: var(--muted); }
+.feedback .status[data-tone=ok] { color: #7ee2a8; }
+.feedback .status[data-tone=error] { color: #ffb0a8; }
+.feedback .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.btn-solid:disabled { opacity: 0.6; cursor: default; }
 .btn-solid { padding: 12px 26px; border-radius: 999px; border: 0; background: var(--text); color: #0b0e14; font: inherit; font-weight: 600; font-size: 16px; cursor: pointer; }
 .btn-solid:hover { background: #fff; }
 .btn-ghost { cursor: pointer; font-family: inherit; }
