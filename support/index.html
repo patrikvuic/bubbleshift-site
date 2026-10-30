@@ -24,7 +24,21 @@
 <body>
 <header class="bar"><a class="brand" href="../"><img src="../assets/mark-128.png" alt="" width="32" height="32">Bubbleshift</a>
 <nav><a href="../try/">Try it</a><a href="../guides/">Guides</a><a href="../support/">Support</a></nav></header>
-<main class="doc"><div class="contact"><h2>Contact support</h2><p>Email <a href="mailto:vuicpatrik@gmail.com">vuicpatrik@gmail.com</a>. Please include your macOS version, the Bubbleshift version, the input and output formats, and any error message. Don't attach private files unless we ask and you choose to share them.</p></div>
+<main class="doc"><form class="contact feedback" id="feedback" data-to="contact@bubbleshift.io">
+<h2>Report a bug or suggest a feature</h2>
+<p>Pick what it's about, write a line or two, and press Send: your mail app opens with the message ready to go to <a href="mailto:contact@bubbleshift.io">contact@bubbleshift.io</a>. Nothing is sent from this page. Please don't attach private files unless we ask and you choose to share them.</p>
+<fieldset class="kinds"><legend class="visually-hidden">What is it about?</legend>
+<label><input type="radio" name="kind" value="bug" checked><span>Bug</span></label>
+<label><input type="radio" name="kind" value="feature"><span>Feature idea</span></label>
+<label><input type="radio" name="kind" value="question"><span>Question</span></label>
+</fieldset>
+<label class="field">Summary<input name="summary" maxlength="120" placeholder="e.g. Merging two PDFs keeps the wrong order" autocomplete="off"></label>
+<label class="field">Details<textarea name="details" rows="7"></textarea></label>
+<div class="versions"><label class="field">macOS version<input name="macos" placeholder="e.g. 15.1" autocomplete="off"></label>
+<label class="field">Bubbleshift version<input name="app" placeholder="Bubbleshift › About" autocomplete="off"></label></div>
+<div class="send"><button class="btn-solid" type="submit">Send</button><button class="btn-ghost copy" type="button">Copy address</button></div>
+<p class="sent" hidden>Your mail app should open now. If it doesn't (Gmail or another webmail in the browser), copy the address and send it from there.</p>
+</form>
 <h1>Using Bubbleshift</h1>
 <h2>Convert a file</h2>
 <p>Click the center of the drop area to choose files, or drag files onto it. Choose an output format for each queued file, select the destination, and press Convert. Completed files can be revealed in Finder with the folder button. Originals are kept; existing output names get a numeric suffix.</p>
@@ -66,6 +80,41 @@
 <h2>Troubleshooting</h2>
 <p>If a folder is unavailable, choose another output folder or reconnect its drive. If a remembered folder permission stops working, forget saved folder permissions in Settings and select it again. If Apple-app export fails, open the required app once and check Automation permissions. Password-protected PDFs must be unlocked before conversion.</p>
 <p>Closing the window keeps Bubbleshift in the menu bar. Use Quit Bubbleshift to stop it. For further assistance, email us and include your macOS version, Bubbleshift version, input/output formats, and the error message. Do not include sensitive files by default.</p></main>
-<footer><span>© 2026 Patrik Vuić</span><nav><a href="../guides/">Guides</a><a href="../support/">Support</a><a href="../privacy/">Privacy policy</a></nav></footer>
+<script>
+(() => {
+  const form = document.getElementById('feedback'), to = form.dataset.to;
+  const templates = {
+    bug: 'What happened:\n\n\nWhat I expected:\n\n\nSteps (file type, format or action chosen):\n\n',
+    feature: 'What I would like Bubbleshift to do:\n\n\nWhy it would help:\n\n',
+    question: '',
+  };
+  const kind = () => form.querySelector('input[name=kind]:checked').value;
+  const details = form.querySelector('textarea'), versions = form.querySelector('.versions');
+  // Fill the details with the chosen kind's prompts, unless the visitor has typed their own.
+  let typed = false;
+  details.addEventListener('input', () => { typed = details.value.trim() !== '' && details.value !== templates[kind()]; });
+  const choose = () => {
+    if (!typed) details.value = templates[kind()];
+    versions.hidden = kind() !== 'bug';
+  };
+  form.querySelectorAll('input[name=kind]').forEach(r => r.addEventListener('change', choose));
+  choose();
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const label = { bug: 'Bug', feature: 'Feature idea', question: 'Question' }[kind()];
+    const summary = form.summary.value.trim();
+    let body = details.value.trim();
+    if (kind() === 'bug') body += '\n\nmacOS: ' + (form.macos.value.trim() || '?') + '\nBubbleshift: ' + (form.app.value.trim() || '?');
+    location.href = 'mailto:' + to + '?subject=' + encodeURIComponent('Bubbleshift ' + label + (summary ? ': ' + summary : ''))
+      + '&body=' + encodeURIComponent(body + '\n');
+    form.querySelector('.sent').hidden = false;
+  });
+  const copy = form.querySelector('.copy');
+  copy.addEventListener('click', () => navigator.clipboard.writeText(to).then(() => {
+    copy.textContent = 'Copied'; setTimeout(() => copy.textContent = 'Copy address', 1800);
+  }));
+})();
+</script>
+<footer><span>© 2026 Patrik Vuić</span><nav><a href="../guides/">Guides</a><a href="../support/">Support</a><a href="../support/#feedback">Report a bug</a><a href="../privacy/">Privacy policy</a></nav></footer>
 </body>
 </html>
