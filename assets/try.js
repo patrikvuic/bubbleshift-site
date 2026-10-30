@@ -118,7 +118,7 @@
     docsearch: svg('<path d="M7 3h7l4 4v5"/><path d="M7 3v18h5"/><circle cx="16" cy="16" r="3"/><path d="m18.2 18.2 2.3 2.3"/>'),
   };
   const ACTION = {
-    compress: ['Compress', 'Compress · hold for levels', 'Compressing…', I.compress, T.cyan],
+    compress: ['Shrink', 'Compress · hold for levels', 'Compressing…', I.compress, T.cyan],
     merge: ['Merge', 'Merge into one PDF', 'Merging…', I.merge, T.red],
     collage: ['Collage', 'Arrange into one image…', 'Making collage…', I.collage, T.red],
     split: ['Split', 'Split into pages', 'Splitting…', I.scissors, T.red],
@@ -134,14 +134,14 @@
     fade: ['Fade', 'Fade in and out', 'Fading…', I.fade, T.violet],
     strip: ['Clean', 'Remove location & metadata', 'Removing metadata…', I.location, T.green],
     ocr: ['Text', 'Extract text', 'Reading text…', I.viewfinder, T.grey],
-    searchable: ['Searchable', 'Make a searchable PDF', 'Recognizing text…', I.docsearch, T.grey],
+    searchable: ['OCR', 'Make a searchable PDF', 'Recognizing text…', I.docsearch, T.grey],
     mute: ['Mute', 'Remove sound', 'Removing sound…', I.mute, T.pink],
     cutout: ['Cutout', 'Remove background', 'Removing background…', I.wand, T.purple],
   };
   const COMMAND = {
     airdrop: ['AirDrop', 'Send with AirDrop', I.airdrop], copypath: ['Path', 'Copy path', I.link],
     copyfiles: ['Copy', 'Copy, then paste anywhere', I.clipboard], copyto: ['Copy to', 'Copy to a folder…', I.folderplus],
-    terminal: ['Terminal', 'Open in Terminal', I.terminal],
+    terminal: ['Shell', 'Open in Terminal', I.terminal],
   };
   function look(key) {
     if (key.startsWith('resize@')) {
